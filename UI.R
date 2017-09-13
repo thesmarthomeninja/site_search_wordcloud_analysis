@@ -7,13 +7,21 @@ library(shiny)
 
 ui <- fluidPage(
   
-  # Include Google Tag Manager container to track usage of this tool. Very useful if you have 
-  # little engagement or want to track that.  Or if you want to keep track to make sure you dont
-  # go over your api call limit.  Its blocked but add container to your same folder as this r project
-  # is downloaded to.
-  #tags$head(includeScript("gtm.js")),
+  # So you can track stuff.  You can also just put the google analytics script in here- just go to your admin in google analytics and 
+  # then go to your property and create a new property (to get a new UA tracking ID) and after you are done doing that it will give you 
+  # a script at the end, copy the whole script and use notepad++ or some kind of text editor/VIM to save a .js file.  This is IMPORTANT
+  # though- make sure to remove the script tags the <script> opening tag and the </script> closing tag from your ga.js file.  whatever you
+  # save your filename as- replace the "gtm.js" with whatever name you name it followed by .js - denoting that its a javascript file so that
+  # this R script can run it.  This line below is already running code to ensure it runs as a script so very important on how and where you
+  # save this.  Save it exactly in your working directory i.e. the file that your project is in before you edit this line of code on line
+  # 18 here and then go ahead and deploy.  Then go back to your analytics and check to see if its working- because at that point- youll
+  # be able to see engagements and use of your app/tool.  You can also use google tag manager of course. Same thing goes- create a 
+  # container, and then after you've added your UA/analytics tag for page views/events then save it and get the script with the functions
+  # at the end and remove the opening and closing script tags and save it in your project file and you can just save either or as just
+  # "gtm.js" to save you the hassle of one extra step of renaming this.  :)
+  tags$head(includeScript("gtm.js")),
   
-  theme = "cosmo",   # Change to a different theme to slightly alter the look and feel as desired
+  theme = "cosmo",   # It's definetely a cosmo-ish feel and them.  Go for it.  This is simply for styling, chill...
   
   # Title and Overview
   titlePanel("Google Analytics Site Search Term Viewer"),
