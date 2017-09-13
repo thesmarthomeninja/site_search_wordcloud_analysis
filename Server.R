@@ -10,22 +10,22 @@
 # Brodeur, which he demo'd at Superweek Hungary 2017. See his original post/code at:
 # https://www.linkedin.com/pulse/using-r-get-real-insights-from-your-searched-terms-words-brodeur
 #
-library(shiny)              # We must web-enable this whole thing
-library(DT)                 # For the frequency table display
-library(shinyjs)
+library("shiny")              # We must web-enable this whole thing
+library("DT")                 # For the frequency table display
+library("shinyjs")
 
 
 # There's a wrinkle for running this on shinyapps.io that requires using the Github
 # version of googleAuthR. I don't know if this is actually still an issue or not, 
 # actually. See: https://twitter.com/ryanpraski/status/783754506681155584
-library(googleAuthR)        # To prompt for authentication by the user
-library(googleAnalyticsR)   # For the pulling of the data
-library(tidyverse)          # For data transformations -- primarily just uses dplyr commands
+library("googleAuthR")        # To prompt for authentication by the user
+library("googleAnalyticsR")   # For the pulling of the data
+library("tidyverse")          # For data transformations -- primarily just uses dplyr commands
 
 # The libraries needed for working with the text.
-library(tm)
-library(SnowballC)
-library(wordcloud)
+library("tm")
+library("SnowballC")
+library("wordcloud")
 
 # This is important for your API connection to happen with shiny & Google Analytics API webapp
 #You need to create an account via developers console with GA Reporting API and Create Credentials
@@ -40,13 +40,6 @@ library(wordcloud)
 # options("googleAuthR.webapp.client_secret" = "[GOOGLE APP CLIENT SECRET]")
 
 
-options("googleAuthR.webapp.client_id" = "Enter your client ID here from the API setup Credentials you got")
-options("googleAuthR.webapp.client_secret" = "Enter Client Secret here- again this is from the Google API auth setup")
-
-# All we need to do is read the GA data, so we can limit the scope pretty
-# severely.
-options("googleAuthR.scopes.selected" = c("https://www.googleapis.com/auth/analytics",
-                                          "https://www.googleapis.com/auth/analytics.readonly"))
 
 
 ####################
@@ -62,7 +55,13 @@ daterange_options <- list("Last 7 Days" = 7,
                           "Last 30 Days" = 30,
                           "Last 60 Days" = 60,
                           "Last 90 Days" = 90)
+options("googleAuthR.webapp.client_id" = "insert your clientid")
+options("googleAuthR.webapp.client_secret" = "insert your secret")
 
+# All we need to do is read the GA data, so we can limit the scope pretty
+# severely.
+options("googleAuthR.scopes.selected" = c("https://www.googleapis.com/auth/analytics",
+                                          "https://www.googleapis.com/auth/analytics.readonly"))
 ################
 # Define server logic
 ################
